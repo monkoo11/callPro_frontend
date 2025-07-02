@@ -27,7 +27,7 @@ function App() {
 
   const handleCallType = (event) => {
     setCallType(event.target.value);
-  }
+  };
 
   const send = () => {
     let body = {};
@@ -46,6 +46,10 @@ function App() {
     alert(unique_id + ' ' + number + ' ' + call_date + ' ' + call_type);
   };
 
+  const openNewWindow = () => {
+    window.open('http://127.0.0.1:3000', '_blank');
+  };
+
   const get = () => {
     axios.get('http://127.0.0.1:3001/api/list')
     .then((res) => {
@@ -58,7 +62,7 @@ function App() {
   }
 
   const open = () => {
-    const socket = new WebSocket('ws://127.0.0.1:3002/foo');
+    const socket = new WebSocket('ws://127.0.0.1:3002');
     socket.addEventListener('open', event => {
       console.log('WebSocket connection established!');
       socket.send('Hello Server!');
@@ -66,6 +70,7 @@ function App() {
 
     socket.addEventListener('message', event => {
       console.log('Message from server: ', event.data);
+      openNewWindow();
     });
   };
 
